@@ -1,0 +1,113 @@
+create-react-app <name-of-app>
+ng generate module app-routing --flat --module=app
+
+
+@Component({
+ selector: 'date-pipe',
+ template: `<div>
+   <p>Today is {{today | date}}</p>
+   <p>Or if you prefer, {{today | date:'fullDate'}}</p>
+   <p>The time is {{today | date:'h:mm a z'}}</p>
+ </div>`
+})
+// Get the current date and time as a date-time value.
+export class DatePipeComponent {
+  today: number = Date.now();
+}
+
+
+pipe
+import { Constants } from './../util/constants';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DatePipe } from '@angular/common';
+
+@Pipe({
+  name: 'dateFormat'
+})
+export class DateFormatPipe extends DatePipe implements PipeTransform {
+  transform(value: any, args?: any): any {
+    return super.transform(value, Constants.DATE_FMT);
+  }
+}
+
+
+import { Constants } from './../util/constants';
+import { DatePipe } from '@angular/common';
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'dateTimeFormat'
+})
+export class DateTimeFormatPipe extends DatePipe implements PipeTransform {
+  transform(value: any, args?: any): any {
+    return super.transform(value, Constants.DATE_TIME_FMT);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-hero-birthday',
+  template: `<p>The hero's birthday is {{ birthday | date }}</p>`
+})
+export class HeroBirthdayComponent {
+  birthday = new Date(1988, 3, 15); // April 15, 1988
+}
+
+
+
+
+<p>The hero's birthday is {{ birthday | date }}</p>
+
+
+<p>The hero's birthday is {{ birthday | date:"MM/dd/yy" }} </p>
+
+
+
+
+
+
+
+
+
+
+
+
+ero-birthday2.component.ts (class)
+content_copy
+export class HeroBirthday2Component {
+  birthday = new Date(1988, 3, 15); // April 15, 1988
+  toggle = true; // start with true == shortDate
+
+  get format()   { return this.toggle ? 'shortDate' : 'fullDate'; }
+  toggleFormat() { this.toggle = !this.toggle; }
+}
+
+
+
+
+
+export class HeroBirthday2Component {
+  birthday = new Date(1988, 3, 15); // April 15, 1988
+  toggle = true; // start with true == shortDate
+
+  get format()   { return this.toggle ? 'shortDate' : 'fullDate'; }
+  toggleFormat() { this.toggle = !this.toggle; }
+}
